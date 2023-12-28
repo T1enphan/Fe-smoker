@@ -34,6 +34,16 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item">
+					<router-link to="/admin/sach">
+						<a class="nav-link">
+							<div class="parent-icon">
+								<i class="fa-solid fa-list"></i>
+							</div>
+							<div class="menu-title">Sách</div>
+						</a>
+					</router-link>
+				</li>
 			</ul>
 		</nav>
 	</div>

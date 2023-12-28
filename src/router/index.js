@@ -10,8 +10,8 @@ const routes = [
         component: ()=>import('../components/ChuyenMuc/index.vue')
     },
     {
-        path : '/admin/chuyen-muc1',
-        component: ()=>import('../components/ChuyenMuc1/index.vue')
+        path : '/admin/sach',
+        component: ()=>import('../components/Sach/index.vue')
     },
 ]
 
