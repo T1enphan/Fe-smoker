@@ -13,6 +13,10 @@ const routes = [
         path : '/admin/sach',
         component: ()=>import('../components/Sach/index.vue')
     },
+    {
+        path : '/admin/thanh-vien',
+        component: ()=>import('../components/ThanhVien/index.vue')
+    },
 ]
 
 const router = createRouter({
