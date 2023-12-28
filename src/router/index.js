@@ -9,6 +9,10 @@ const routes = [
         path : '/admin/chuyen-muc',
         component: ()=>import('../components/ChuyenMuc/index.vue')
     },
+    {
+        path : '/admin/chuyen-muc1',
+        component: ()=>import('../components/ChuyenMuc1/index.vue')
+    },
 ]
 
 const router = createRouter({
