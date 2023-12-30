@@ -17,6 +17,10 @@ const routes = [
         path : '/admin/thanh-vien',
         component: ()=>import('../components/ThanhVien/index.vue')
     },
+    {
+        path : '/admin/khoa',
+        component: ()=>import('../components/Khoa/index.vue')
+    },
 ]
 
 const router = createRouter({
