@@ -56,7 +56,6 @@
 				</li>
 				<li class="nav-item">
 					<router-link to="/admin/tac-gia">
-					<router-link to="/admin/khoa">
 						<a class="nav-link">
 							<div class="parent-icon">
 								<i class="fa-solid fa-list"></i>
@@ -72,6 +71,15 @@
 								<i class="fa-solid fa-list"></i>
 							</div>
 							<div class="menu-title">Thể Loại</div>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/admin/khoa">
+						<a class="nav-link">
+							<div class="parent-icon">
+								<i class="fa-solid fa-list"></i>
+							</div>
 							<div class="menu-title">Khoa</div>
 						</a>
 					</router-link>

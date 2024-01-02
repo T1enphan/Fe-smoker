@@ -16,14 +16,14 @@
                    </div>
                    <div class="mt-2">
                        <label>Ngày Sinh</label>
-                       <input v-model="create_tac_gia.ngay_sinh" type="text" class="form-control mt-1">
+                       <input v-model="create_tac_gia.ngay_sinh" type="date" class="form-control mt-1">
                    </div>
                    <div class="mt-2">
                        <label>Giai Đoạn Sáng Tác</label>
                        <input v-model="create_tac_gia.giai_doan_sang_tac" type="text" class="form-control mt-1">
                    </div>
                    <div class="mt-2">
-                       <label>Tác Phẩm</label>
+                       <label>Tác Phẩm Tiêu Biểu</label>
                        <input v-model="create_tac_gia.tac_pham" type="text" class="form-control mt-1">
                    </div>
 
@@ -118,6 +118,7 @@
                                                Nhật</button>
                                            <button class="btn btn-danger" style="width: 100px;" data-bs-toggle="modal"
                                                data-bs-target="#xoaModal"
+                                               
                                                v-on:click="Object.assign(delete_tac_gia, v)">Xóa</button>
                                      </td>
                                    </tr>
@@ -193,7 +194,7 @@
                        <div class="modal-dialog">
                            <div class="modal-content">
                                <div class="modal-header">
-                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa Nguyên Liệu</h1>
+                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa tác giả</h1>
                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
                                        aria-label="Close"></button>
                                </div>
@@ -205,7 +206,7 @@
                                            <div class="ms-3">
                                                <h6 class="mb-0 text-dark">Warning</h6>
                                                <div class="text-dark">
-                                                   <p>Bạn có muốn xóa sản phẩm <b> Chuyên Mục VIP</b> này không?</p>
+                                                   <p>Bạn có muốn xóa <b class="text-danger">{{ delete_tac_gia.ten_tac_gia }}</b> này không?</p>
                                                    <p>
                                                        <b>Lưu ý:</b> Điều này không thể hoàn tác!
                                                    </p>
@@ -268,6 +269,7 @@ export default {
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
+                        this.create_tac_gia={};
                         this.loadDataTacGia();
                     }
                 });

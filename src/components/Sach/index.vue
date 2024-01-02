@@ -17,85 +17,86 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Mới Bàn</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Mới Sách</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label">Tên Sách</label>
-                                                <input v-model="create_sach.ten_sach" type="text" class="form-control"
-                                                    placeholder="Nhập tên sách">
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="form-label">Thể Loại</label>
-                                                <input v-model="create_sach.id_the_loai" type="text" class="form-control"
-                                                    placeholder="Nhập Thể Loại">
-                                            </div>
+                                        <div class="col">
+                                            <label class="form-label">Tên Sách</label>
+                                            <input v-model="create_sach.ten_sach" type="text" class="form-control"
+                                                placeholder="Nhập tên sách">
                                         </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label">Chuyên Mục</label>
-                                                <input v-model="create_sach.id_chuyen_muc" type="text" class="form-control"
-                                                    placeholder="Nhập Chuyên Mục">
-                                            </div>
-                                            <div class="col-6">
+                                        <div class="col">
+                                            <label class="form-label"> Slug Sách</label>
+                                            <input v-model="create_sach.slug_sach" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label"> Năm Xuất Bản</label>
+                                            <input v-model="create_sach.nam_xuat_ban" class="form-control" type="number">
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Hình Ảnh</label>
+                                            <input v-model="create_sach.hinh_anh" type="text" class="form-control"
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label class="form-label">Số Lượng</label>
+                                            <input v-model="create_sach.so_luong" type="number" class="form-control"
+                                                placeholder="">
+                                        </div>
+                                        <div class="col-6">
                                                 <label class="form-label">Tác Giả</label>
-                                                <input v-model="create_sach.id_tac_gia" type="text" class="form-control"
-                                                    placeholder="Nhập Tác Giả">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label">Số Lượng</label>
-                                                <input v-model="create_sach.so_luong" type="text" class="form-control"
-                                                    placeholder="">
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="form-label">Mô Tả Ngắn</label>
-                                                <input v-model="create_sach.mo_ta_ngan" type="text" class="form-control"
-                                                    placeholder="Nhập Mô Tả Ngắn">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label">Mô Tả Chi Tiết</label>
-                                                <input v-model="create_sach.mo_ta_chi_tiet" type="text" class="form-control"
-                                                    placeholder="Nhập Mô Tả Chi Tiết">
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="form-label">Hình Ảnh</label>
-                                                <input v-model="create_sach.hinh_anh" type="text" class="form-control"
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label">Tình Trạng</label>
-                                                <select v-model="create_sach.tinh_trang" class="form-select"
-                                                    aria-label="Default select example">
-
-                                                    <option value="0">Tạm Dừng</option>
-                                                    <option value="1">Hoạt Động </option>
-
+                                                <select v-model="create_sach.id_tac_gia" class="form-control" name="" id="">
+                                                    <template v-for="(value1, key1) in list_sach">
+                                                        <option v-bind:value="value1.id">{{ value1.ten_tac_gia }}</option>
+                                                    </template>
                                                 </select>
-                                            </div>
-                                            <div class="col-6">
-                                                <label class="form-label"> Slug Sách</label>
-                                                <input v-model="create_sach.slug_sach" class="form-control" type="text">
-                                            </div>
-
                                         </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label"> Năm Xuất Bản</label>
-                                                <input v-model="create_sach.nam_xuat_ban" class="form-control"
-                                                    type="number">
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label class="form-label">Chuyên Mục</label>
+                                            <select class="form-control" v-model="create_sach.id_chuyen_muc">
+                                                <template v-for="(value, key) in list_sach">
+                                                    <option v-bind:value="value.id">{{ value.ten_chuyen_muc }}</option>
+                                                </template>
+                                            </select>
                                         </div>
-
+                                        <div class="col-6">
+                                            <label class="form-label">Thể Loại</label>
+                                            <select class="form-control" v-model="create_sach.id_the_loai">
+                                                <template v-for="(value2, key2) in list_sach">
+                                                    <option v-bind:value="value2.id">{{ value2.ten_the_loai }}</option>
+                                                </template>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label class="form-label">Tình Trạng</label>
+                                            <select v-model="create_sach.tinh_trang" class="form-select"
+                                                aria-label="Default select example">
+                                                <option value="0">Tạm Dừng</option>
+                                                <option value="1">Hoạt Động </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="form-label">Mô Tả Ngắn</label>
+                                        <textarea style="height: 100px" v-model="create_sach.mo_ta_ngan" type="text"
+                                            class="form-control" placeholder="Nhập Mô Tả Ngắn">
+                                                </textarea>
+                                    </div>
+                                    <div class="row">
+                                        <label class="form-label">Mô Tả Chi Tiết</label>
+                                        <textarea style="height: 100px" v-model="create_sach.mo_ta_chi_tiet" type="text"
+                                            class="form-control" placeholder="Nhập Mô Tả Chi Tiết"></textarea>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -122,8 +123,8 @@
                             </tr>
                             <tr class="text-center align-middle">
                                 <th>#</th>
-                                <th> Tên Sách</th>
-                                <th> Slug Sách</th>
+                                <th>Tên Sách</th>
+                                <th>Slug Sách</th>
                                 <th>Thể Loại</th>
                                 <th>Chuyên Mục</th>
                                 <th>Tác Giả</th>
@@ -144,10 +145,9 @@
                                 <td class="align-middle text-nowrap">{{ v.id_chuyen_muc }}</td>
                                 <td class="align-middle text-nowrap">{{ v.id_tac_gia }}</td>
                                 <td class="align-middle text-nowrap">{{ v.so_luong }}</td>
-
                                 <td class="align-middle text-nowrap">{{ v.mo_ta_ngan }}</td>
                                 <td class="align-middle text-nowrap">{{ v.mo_ta_chi_tiet }}</td>
-                                <td class="align-middle text-nowrap">{{ v.hinh_anh }}</td>
+                                <td class="align-middle text-nowrap text-center"><img style="height: 100px; width: 120px;" v-bind:src="v.hinh_anh"></td>
                                 <td class="align-middle text-nowrap text-center">
                                     <button v-if="v.tinh_trang == 0" class="btn btn-success">Hoạt Động</button>
                                     <button v-else class="btn btn-warning">Tạm Dừng</button>
@@ -156,8 +156,8 @@
                                     <button class="btn btn-primary" style="margin-right: 4px;" data-bs-toggle="modal"
                                         v-on:click="Object.assign(edit_sach, v)" data-bs-target="#capNhatmodal">Cập
                                         Nhật</button>
-                                    <button v-on:click="Object.assign(delete_sach,v)" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#xoaModal">Xóa</button>
+                                    <button v-on:click="Object.assign(delete_sach, v)" class="btn btn-danger"
+                                        data-bs-toggle="modal" data-bs-target="#xoaModal">Xóa</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -272,7 +272,7 @@
                                             <div class="ms-3">
                                                 <h6><b class="text-danger">Warning</b></h6>
                                                 <div class="text-dark">
-                                                    <p>Bạn có muốn xóa  <b>{{ delete_sach.ten_sach }}</b> này không?
+                                                    <p>Bạn có muốn xóa <b>{{ delete_sach.ten_sach }}</b> này không?
                                                     </p>
                                                     <p>
                                                         <b>Lưu ý:</b> Điều này không thể hoàn tác!
@@ -303,6 +303,9 @@ export default {
     data() {
         return {
             list_sach: [],
+            list_the_loai: [],
+            list_chuyen_muc: [],
+            list_tac_gia: [],
             key_search: {},
             create_sach: {},
             delete_sach: {},
@@ -317,7 +320,10 @@ export default {
             axios
                 .get('http://127.0.0.1:8000/api/admin/sach/lay-du-lieu')
                 .then((res) => {
-                    this.list_sach = res.data.sach;
+                    this.list_sach = res.data.data;
+                    // this.list_chuyen_muc = res.data.chuyenmuc;
+                    // this.list_the_loai = res.data.theloai;
+                    // this.list_tac_gia = res.data.tacgia;
                 });
         },
         searchSach() {
