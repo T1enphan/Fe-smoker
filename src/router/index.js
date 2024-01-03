@@ -25,6 +25,10 @@ const routes = [
         path : '/admin/the-loai',
         component: ()=>import('../components/TheLoai/index.vue')
     },
+    {
+        path : '/admin/nha-cung-cap',
+        component: ()=>import('../components/Nhacungcap/index.vue')
+    },
 ]
 
 const router = createRouter({

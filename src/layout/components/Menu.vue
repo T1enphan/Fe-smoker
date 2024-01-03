@@ -74,6 +74,16 @@
 						</a>
 					</router-link>
 				</li>
+				<li class="nav-item">
+					<router-link to="/admin/nha-cung-cap">
+						<a class="nav-link">
+							<div class="parent-icon">
+								<i class="fa-solid fa-list"></i>
+							</div>
+							<div class="menu-title">Nhà Cung Cấp</div>
+						</a>
+					</router-link>
+				</li>
 			</ul>
 		</nav>
 	</div>
