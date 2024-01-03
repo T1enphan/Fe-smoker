@@ -51,19 +51,19 @@
                                                 placeholder="">
                                         </div>
                                         <div class="col-6">
-                                                <label class="form-label">Tác Giả</label>
-                                                <select v-model="create_sach.id_tac_gia" class="form-control" name="" id="">
-                                                    <template v-for="(value1, key1) in list_sach">
-                                                        <option v-bind:value="value1.id">{{ value1.ten_tac_gia }}</option>
-                                                    </template>
-                                                </select>
+                                            <label class="form-label">Tác Giả</label>
+                                            <select v-model="create_sach.id_tac_gia" class="form-control" name="" id="">
+                                                <template v-for="(value1, key1) in list_tac_gia">
+                                                    <option v-bind:value="value1.id">{{ value1.ten_tac_gia }}</option>
+                                                </template>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <label class="form-label">Chuyên Mục</label>
                                             <select class="form-control" v-model="create_sach.id_chuyen_muc">
-                                                <template v-for="(value, key) in list_sach">
+                                                <template v-for="(value, key) in list_chuyen_muc">
                                                     <option v-bind:value="value.id">{{ value.ten_chuyen_muc }}</option>
                                                 </template>
                                             </select>
@@ -71,7 +71,7 @@
                                         <div class="col-6">
                                             <label class="form-label">Thể Loại</label>
                                             <select class="form-control" v-model="create_sach.id_the_loai">
-                                                <template v-for="(value2, key2) in list_sach">
+                                                <template v-for="(value2, key2) in list_the_loai">
                                                     <option v-bind:value="value2.id">{{ value2.ten_the_loai }}</option>
                                                 </template>
                                             </select>
@@ -109,14 +109,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th colspan="100%">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Nhập thông tin cần tìm">
+                                        <input v-on:keyup.enter="searchSach()"  v-model="key_search.abc" type="text" class="form-control" placeholder="Nhập thông tin cần tìm">
                                         <button class="btn btn-primary">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            <i class="fa-solid fa-magnifying-glass" v-on:click="searchSach()" ></i>
                                         </button>
                                     </div>
                                 </th>
@@ -141,16 +141,29 @@
                                 <th class="align-middle text-nowrap text-center">{{ k + 1 }}</th>
                                 <td class="align-middle text-nowrap">{{ v.ten_sach }}</td>
                                 <td class="align-middle text-nowrap">{{ v.slug_sach }}</td>
-                                <td class="align-middle text-nowrap">{{ v.id_the_loai }}</td>
-                                <td class="align-middle text-nowrap">{{ v.id_chuyen_muc }}</td>
-                                <td class="align-middle text-nowrap">{{ v.id_tac_gia }}</td>
+                                <td class="align-middle text-nowrap">{{ v.ten_the_loai }}</td>
+                                <td class="align-middle text-nowrap">{{ v.ten_chuyen_muc }}</td>
+                                <td class="align-middle text-nowrap">{{ v.ten_tac_gia }}</td>
                                 <td class="align-middle text-nowrap">{{ v.so_luong }}</td>
-                                <td class="align-middle text-nowrap">{{ v.mo_ta_ngan }}</td>
-                                <td class="align-middle text-nowrap">{{ v.mo_ta_chi_tiet }}</td>
-                                <td class="align-middle text-nowrap text-center"><img style="height: 100px; width: 120px;" v-bind:src="v.hinh_anh"></td>
                                 <td class="align-middle text-nowrap text-center">
-                                    <button v-if="v.tinh_trang == 0" class="btn btn-success">Hoạt Động</button>
-                                    <button v-else class="btn btn-warning">Tạm Dừng</button>
+                                    <button type="button" v-on:click="mo_ta = v" class="btn btn-primary text-center"
+                                        data-bs-toggle="modal" data-bs-target="#motangan">
+                                        <i class="fa-solid fa-file"></i>
+                                    </button>
+
+                                </td>
+                                <td class="align-middle text-nowrap text-center">
+                                    <button type="button" v-on:click="mo_ta = v" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#motachitiet">
+                                        <i class="fa-regular fa-file"></i>
+                                    </button>
+
+                                </td>
+                                <td class="align-middle text-nowrap text-center"><img style="height: 100px; width: 120px;"
+                                        v-bind:src="v.hinh_anh"></td>
+                                <td class="align-middle text-nowrap text-center">
+                                    <button @:click="doiTrangThai(v)" v-if="v.tinh_trang == 1" class="btn btn-success">Hoạt Động</button>
+                                    <button @:click="doiTrangThai(v)" v-else class="btn btn-warning">Tạm Dừng</button>
                                 </td>
                                 <td class="align-middle text-nowrap text-center">
                                     <button class="btn btn-primary" style="margin-right: 4px;" data-bs-toggle="modal"
@@ -290,6 +303,44 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="motangan" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ mo_ta.mo_ta_ngan }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="motachitiet" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Mô tả chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{ mo_ta.mo_ta_chi_tiet }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -310,10 +361,14 @@ export default {
             create_sach: {},
             delete_sach: {},
             edit_sach: {},
+            mo_ta: {},
         }
     },
     mounted() {
-        this.loadDataSach()
+        this.loadDataSach();
+        this.loadDataChuyenMuc();
+        this.loadDataTacGia();
+        this.loadDataTheLoai();
     },
     methods: {
         loadDataSach() {
@@ -321,16 +376,35 @@ export default {
                 .get('http://127.0.0.1:8000/api/admin/sach/lay-du-lieu')
                 .then((res) => {
                     this.list_sach = res.data.data;
-                    // this.list_chuyen_muc = res.data.chuyenmuc;
-                    // this.list_the_loai = res.data.theloai;
-                    // this.list_tac_gia = res.data.tacgia;
+                    console.log(this.list_sach);
+                });
+        },
+        loadDataTacGia() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/tac-gia/lay-du-lieu')
+                .then((res) => {
+                    this.list_tac_gia = res.data.tac_gia;
+                });
+        },
+        loadDataTheLoai() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/the-loai/lay-du-lieu')
+                .then((res) => {
+                    this.list_the_loai = res.data.the_loai;
+                });
+        },
+        loadDataChuyenMuc() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/chuyen-muc/lay-du-lieu')
+                .then((res) => {
+                    this.list_chuyen_muc = res.data.chuyen_muc;
                 });
         },
         searchSach() {
             axios
                 .post('http://127.0.0.1:8000/api/admin/sach/tim-sach', this.key_search)
                 .then((res) => {
-                    this.list_sach = res.data.sach;
+                    this.list_sach = res.data.data;
                 });
         },
 
