@@ -29,6 +29,10 @@ const routes = [
         path : '/admin/nha-cung-cap',
         component: ()=>import('../components/Nhacungcap/index.vue')
     },
+    {
+        path : '/admin/khoa',
+        component: ()=>import('../components/Khoa/index.vue')
+    },
 ]
 
 const router = createRouter({
