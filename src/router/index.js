@@ -26,6 +26,10 @@ const routes = [
         component: ()=>import('../components/TheLoai/index.vue')
     },
     {
+        path : '/admin/nha-cung-cap',
+        component: ()=>import('../components/Nhacungcap/index.vue')
+    },
+    {
         path : '/admin/khoa',
         component: ()=>import('../components/Khoa/index.vue')
     },
