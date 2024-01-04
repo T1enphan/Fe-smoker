@@ -18,6 +18,10 @@ const routes = [
         component: ()=>import('../components/ThanhVien/index.vue')
     },
     {
+        path : '/admin/admin',
+        component: ()=>import('../components/Admin/index.vue')
+    },
+    {
         path : '/admin/tac-gia',
         component: ()=>import('../components/TacGia/index.vue')
     },
