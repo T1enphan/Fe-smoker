@@ -21,6 +21,22 @@ const routes = [
         path : '/admin/admin',
         component: ()=>import('../components/Admin/index.vue')
     },
+    {
+        path : '/admin/tac-gia',
+        component: ()=>import('../components/TacGia/index.vue')
+    },
+    {
+        path : '/admin/the-loai',
+        component: ()=>import('../components/TheLoai/index.vue')
+    },
+    {
+        path : '/admin/nha-cung-cap',
+        component: ()=>import('../components/Nhacungcap/index.vue')
+    },
+    {
+        path : '/admin/khoa',
+        component: ()=>import('../components/Khoa/index.vue')
+    },
 ]
 
 const router = createRouter({
