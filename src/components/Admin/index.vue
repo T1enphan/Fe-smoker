@@ -33,7 +33,6 @@
                                 <th>#</th>
                                 <th>Họ và tên</th>
                                 <th>Email</th>
-                                <th>Password</th>
                                 <th>Ngày Sinh</th>
                                 <th>Số Điện Thoại</th>
                                 <th>Tình trạng</th>
@@ -45,7 +44,6 @@
                                 <td>{{ k + 1 }}</td>
                                 <td>{{ v.ho_va_ten }}</td>
                                 <td>{{ v.email }}</td>
-                                <td>{{ v.password }}</td>
                                 <td>{{ v.ngay_sinh }}</td>
                                 <td>{{ v.so_dien_thoai }}</td>
                                 <td class="align-middle text-nowrap text-center">
@@ -104,7 +102,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
-                        <button v-on:click="createAdmin()" type="button" class="btn btn-primary">Thêm Mới</button>
+                        <button v-on:click="createAdmin()" type="button" data-bs-dismiss="modal" class="btn btn-primary">Thêm Mới</button>
                     </div>
                 </div>
             </div>
@@ -228,7 +226,7 @@ export default {
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
-                        this.create_admin = "";
+                        this.create_admin = {};
                         this.loadDataAdmin();
                     }
                 });
