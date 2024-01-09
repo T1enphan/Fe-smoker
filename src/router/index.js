@@ -34,7 +34,7 @@ const routes = [
     },
     {
         path: '/admin/admin',
-        component: () => import('../components/Admin/index.vue')
+        component: () => import('../components/Admin/index.vue'),
     },
     {
         path: '/admin/tac-gia',
@@ -60,6 +60,11 @@ const routes = [
         path: '/admin/chi-tiet-sach',
         component: () => import('../components/ChiTietSach/index.vue'),
     },
+    {
+        path: '/admin/thue-sach',
+        component: () => import('../components/MuonSach/index.vue'),
+    },
+
 ]
 
 const router = createRouter({

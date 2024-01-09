@@ -109,72 +109,76 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th colspan="100%">
-                                    <div class="input-group mb-3">
-                                        <input v-on:keyup.enter="searchSach()"  v-model="key_search.abc" type="text" class="form-control" placeholder="Nhập thông tin cần tìm">
-                                        <button class="btn btn-primary">
-                                            <i class="fa-solid fa-magnifying-glass" v-on:click="searchSach()" ></i>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="100%">
+                                        <div class="input-group mb-3">
+                                            <input v-on:keyup.enter="searchSach()" v-model="key_search.abc" type="text"
+                                                class="form-control" placeholder="Nhập thông tin cần tìm">
+                                            <button class="btn btn-primary">
+                                                <i class="fa-solid fa-magnifying-glass" v-on:click="searchSach()"></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <th>#</th>
+                                    <th>Tên Sách</th>
+                                    <th>Slug Sách</th>
+                                    <th>Thể Loại</th>
+                                    <th>Chuyên Mục</th>
+                                    <th>Tác Giả</th>
+                                    <th>Số Lượng</th>
+                                    <th>Mô Tả Ngắn</th>
+                                    <th>Mô Tả Chi Tiết</th>
+                                    <th>Hình Ảnh</th>
+                                    <th>Tình Trạng</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(v, k) in list_sach">
+                                    <th class="align-middle text-nowrap text-center">{{ k + 1 }}</th>
+                                    <td class="align-middle text-nowrap">{{ v.ten_sach }}</td>
+                                    <td class="align-middle text-nowrap">{{ v.slug_sach }}</td>
+                                    <td class="align-middle text-nowrap">{{ v.ten_the_loai }}</td>
+                                    <td class="align-middle text-nowrap">{{ v.ten_chuyen_muc }}</td>
+                                    <td class="align-middle text-nowrap">{{ v.ten_tac_gia }}</td>
+                                    <td class="align-middle text-nowrap">{{ v.so_luong }}</td>
+                                    <td class="align-middle text-nowrap text-center">
+                                        <button type="button" v-on:click="mo_ta = v" class="btn btn-primary text-center"
+                                            data-bs-toggle="modal" data-bs-target="#motangan">
+                                            <i class="fa-solid fa-file"></i>
                                         </button>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr class="text-center align-middle">
-                                <th>#</th>
-                                <th>Tên Sách</th>
-                                <th>Slug Sách</th>
-                                <th>Thể Loại</th>
-                                <th>Chuyên Mục</th>
-                                <th>Tác Giả</th>
-                                <th>Số Lượng</th>
-                                <th>Mô Tả Ngắn</th>
-                                <th>Mô Tả Chi Tiết</th>
-                                <th>Hình Ảnh</th>
-                                <th>Tình Trạng</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(v, k) in list_sach">
-                                <th class="align-middle text-nowrap text-center">{{ k + 1 }}</th>
-                                <td class="align-middle text-nowrap">{{ v.ten_sach }}</td>
-                                <td class="align-middle text-nowrap">{{ v.slug_sach }}</td>
-                                <td class="align-middle text-nowrap">{{ v.ten_the_loai }}</td>
-                                <td class="align-middle text-nowrap">{{ v.ten_chuyen_muc }}</td>
-                                <td class="align-middle text-nowrap">{{ v.ten_tac_gia }}</td>
-                                <td class="align-middle text-nowrap">{{ v.so_luong }}</td>
-                                <td class="align-middle text-nowrap text-center">
-                                    <button type="button" v-on:click="mo_ta = v" class="btn btn-primary text-center"
-                                        data-bs-toggle="modal" data-bs-target="#motangan">
-                                        <i class="fa-solid fa-file"></i>
-                                    </button>
 
-                                </td>
-                                <td class="align-middle text-nowrap text-center">
-                                    <button type="button" v-on:click="mo_ta = v" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#motachitiet">
-                                        <i class="fa-regular fa-file"></i>
-                                    </button>
+                                    </td>
+                                    <td class="align-middle text-nowrap text-center">
+                                        <button type="button" v-on:click="mo_ta = v" class="btn btn-primary"
+                                            data-bs-toggle="modal" data-bs-target="#motachitiet">
+                                            <i class="fa-regular fa-file"></i>
+                                        </button>
 
-                                </td>
-                                <td class="align-middle text-nowrap text-center"><img style="height: 100px; width: 120px;"
-                                        v-bind:src="v.hinh_anh"></td>
-                                <td class="align-middle text-nowrap text-center">
-                                    <button @:click="doiTrangThai(v)" v-if="v.tinh_trang == 1" class="btn btn-success">Hoạt Động</button>
-                                    <button @:click="doiTrangThai(v)" v-else class="btn btn-warning">Tạm Dừng</button>
-                                </td>
-                                <td class="align-middle text-nowrap text-center">
-                                    <button class="btn btn-primary" style="margin-right: 4px;" data-bs-toggle="modal"
-                                        v-on:click="Object.assign(edit_sach, v)" data-bs-target="#capNhatmodal">Cập
-                                        Nhật</button>
-                                    <button v-on:click="Object.assign(delete_sach, v)" class="btn btn-danger"
-                                        data-bs-toggle="modal" data-bs-target="#xoaModal">Xóa</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td class="align-middle text-nowrap text-center"><img
+                                            style="height: 100px; width: 120px;" v-bind:src="v.hinh_anh"></td>
+                                    <td class="align-middle text-nowrap text-center">
+                                        <button @:click="doiTrangThai(v)" v-if="v.tinh_trang == 1"
+                                            class="btn btn-success">Hoạt Động</button>
+                                        <button @:click="doiTrangThai(v)" v-else class="btn btn-warning">Tạm Dừng</button>
+                                    </td>
+                                    <td class="align-middle text-nowrap text-center">
+                                        <button class="btn btn-primary" style="margin-right: 4px;" data-bs-toggle="modal"
+                                            v-on:click="Object.assign(edit_sach, v)" data-bs-target="#capNhatmodal">Cập
+                                            Nhật</button>
+                                        <button v-on:click="Object.assign(delete_sach, v)" class="btn btn-danger"
+                                            data-bs-toggle="modal" data-bs-target="#xoaModal">Xóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="modal fade" id="capNhatmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -376,7 +380,6 @@ export default {
                 .get('http://127.0.0.1:8000/api/admin/sach/lay-du-lieu')
                 .then((res) => {
                     this.list_sach = res.data.data;
-                    console.log(this.list_sach);
                 });
         },
         loadDataTacGia() {
