@@ -56,6 +56,10 @@ const routes = [
         component: () => import('../components/Khoa/index.vue'),
         beforeEnter: checkLogin,
     },
+    {
+        path: '/admin/chi-tiet-sach',
+        component: () => import('../components/ChiTietSach/index.vue'),
+    },
 ]
 
 const router = createRouter({
