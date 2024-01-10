@@ -8,11 +8,11 @@
                 <div class="card-body">
                     <div class="mt-2">
                         <label>Tên Thể Loại</label>
-                        <input v-model="create_the_loai.ten_the_loai" type="text" class="form-control mt-1">
+                        <input v-model="create_the_loai.ten_the_loai" v-on:keyup="chuyenThanhSlug()" type="text" class="form-control mt-1">
                     </div>
                     <div class="mt-2">
                         <label>Slug Thể Loại</label>
-                        <input v-model="create_the_loai.slug_the_loai" type="text" class="form-control mt-1">
+                        <input disabled v-model="create_the_loai.slug_the_loai" type="text" class="form-control mt-1">
                     </div>
                     <div class="mt-2">
                         <label>Tình Trạng</label>
@@ -108,14 +108,14 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <label for="">Tên Thể Loại</label>
-                                            <input v-model="edit_the_loai.ten_the_loai" type="text"
+                                            <input v-model="edit_the_loai.ten_the_loai"  v-on:keyup="chuyenThanhSlugEdit()" type="text"
                                                 class="form-control mt-2">
                                         </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
                                             <label for="">Slug Thể Loại</label>
-                                            <input v-model="edit_the_loai.slug_the_loai" type="text"
+                                            <input v-model="edit_the_loai.slug_the_loai"  disabled type="text"
                                                 class="form-control mt-2">
                                         </div>
                                     </div>
@@ -211,12 +211,32 @@ export default {
                     this.list_the_loai = res.data.the_loai;
                 });
         },
+        toSlug(str) {
+            str = str.toLowerCase();
+            str = str
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
+            str = str.replace(/[đĐ]/g, 'd');
+            str = str.replace(/([^0-9a-z-\s])/g, '');
+            str = str.replace(/(\s+)/g, '-');
+            str = str.replace(/-+/g, '-');
+            str = str.replace(/^-+|-+$/g, '');
+
+            return str;
+        },
+        chuyenThanhSlug(){
+            this.create_the_loai.slug_the_loai = this.toSlug(this.create_the_loai.ten_the_loai);
+        },
+        chuyenThanhSlugEdit(){
+            this.edit_the_loai.slug_the_loai = this.toSlug(this.edit_the_loai.ten_the_loai)
+        },
         createTheLoai() {
             axios
                 .post('http://127.0.0.1:8000/api/admin/the-loai/tao-the-loai', this.create_the_loai)
                 .then((res) => {
                     if (res.data.status == true) {
                         toaster.success('Thông báo<br>' + res.data.message);
+                        this.create_the_loai = {},
                         this.loadDataTheLoai();
                     }
                 });

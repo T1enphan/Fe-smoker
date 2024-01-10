@@ -5,8 +5,6 @@ const routes = [
         path: "/auth",
         component: () => import("../components/Auth/index.vue"),
     },
-
-    //Login
     {
         path: "/login",
         component: () => import("../components/Login/index.vue"),

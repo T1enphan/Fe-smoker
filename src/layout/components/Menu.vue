@@ -38,7 +38,7 @@
 					<router-link to="/admin/sach">
 						<a class="nav-link">
 							<div class="parent-icon">
-								<i class="fa-solid fa-list"></i>
+								<i class="fa-solid fa-book"></i>
 							</div>
 							<div class="menu-title">Sách</div>
 						</a>
@@ -48,7 +48,7 @@
 					<router-link to="/admin/thanh-vien">
 						<a class="nav-link">
 							<div class="parent-icon">
-								<i class="fa-solid fa-list"></i>
+								<i class="fa-solid fa-user"></i>
 							</div>
 							<div class="menu-title">Thành Viên</div>
 						</a>
@@ -58,17 +58,17 @@
 					<router-link to="/admin/admin">
 						<a class="nav-link">
 							<div class="parent-icon">
-								<i class="fa-solid fa-list"></i>
+								<i class="fa-solid fa-users-line"></i>
 							</div>
 							<div class="menu-title">Admin</div>
 						</a>
 					</router-link>
 				</li>
-        <li class="nav-item">
+       			 <li class="nav-item">
 					<router-link to="/admin/tac-gia">
 						<a class="nav-link">
 							<div class="parent-icon">
-								<i class="fa-solid fa-list"></i>
+								<i class="fa-regular fa-user"></i>
 							</div>
 							<div class="menu-title">Tác giả</div>
 						</a>
@@ -78,7 +78,7 @@
 					<router-link to="/admin/the-loai">
 						<a class="nav-link">
 							<div class="parent-icon">
-								<i class="fa-solid fa-list"></i>
+								<i class="fa-solid fa-layer-group"></i>
 							</div>
 							<div class="menu-title">Thể Loại</div>
 						</a>
@@ -88,9 +88,29 @@
 					<router-link to="/admin/khoa">
 						<a class="nav-link">
 							<div class="parent-icon">
-								<i class="fa-solid fa-list"></i>
+								<i class="fa-solid fa-school"></i>
 							</div>
 							<div class="menu-title">Khoa</div>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/admin/chi-tiet-sach">
+						<a class="nav-link">
+							<div class="parent-icon">
+								<i class="fa-brands fa-stack-overflow"></i>
+							</div>
+							<div class="menu-title">Phân Loại</div>
+						</a>
+					</router-link>
+				</li>
+				<li class="nav-item">
+					<router-link to="/admin/thue-sach">
+						<a class="nav-link">
+							<div class="parent-icon">
+								<i class="fa-solid fa-money-check"></i>
+							</div>
+							<div class="menu-title">Thuê Sách</div>
 						</a>
 					</router-link>
 				</li>

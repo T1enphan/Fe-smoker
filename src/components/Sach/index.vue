@@ -25,12 +25,12 @@
                                     <div class="row">
                                         <div class="col">
                                             <label class="form-label">Tên Sách</label>
-                                            <input v-model="create_sach.ten_sach" type="text" class="form-control"
+                                            <input v-model="create_sach.ten_sach" v-on:keyup="chuyenThanhSlug()" type="text" class="form-control"
                                                 placeholder="Nhập tên sách">
                                         </div>
                                         <div class="col">
                                             <label class="form-label"> Slug Sách</label>
-                                            <input v-model="create_sach.slug_sach" class="form-control" type="text">
+                                            <input disabled v-model="create_sach.slug_sach" class="form-control" type="text">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -193,24 +193,23 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="form-label">Tên Sách</label>
-                                                <input v-model="edit_sach.ten_sach" type="text" class="form-control"
+                                                <input v-model="edit_sach.ten_sach" v-on:keyup="chuyenThanhSlugEdit()" type="text" class="form-control"
                                                     placeholder="Nhập tên sách">
                                             </div>
                                             <div class="col-6">
-                                                <label class="form-label">Thể Loại</label>
-                                                <input v-model="edit_sach.id_the_loai" type="text" class="form-control"
-                                                    placeholder="Nhập Thể Loại">
+                                                <label class="form-label"> Slug Sách</label>
+                                                <input v-model="edit_sach.slug_sach" disabled class="form-control" type="text">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="form-label">Chuyên Mục</label>
-                                                <input v-model="edit_sach.id_chuyen_muc" type="text" class="form-control"
+                                                <input v-model="edit_sach.ten_chuyen_muc" type="text" class="form-control"
                                                     placeholder="Nhập Chuyên Mục">
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label">Tác Giả</label>
-                                                <input v-model="edit_sach.id_tac_gia" type="text" class="form-control"
+                                                <input v-model="edit_sach.ten_tac_gia" type="text" class="form-control"
                                                     placeholder="Nhập Tác Giả">
                                             </div>
                                         </div>
@@ -220,22 +219,23 @@
                                                 <input v-model="edit_sach.so_luong" type="text" class="form-control"
                                                     placeholder="">
                                             </div>
+                                            
                                             <div class="col-6">
-                                                <label class="form-label">Mô Tả Ngắn</label>
-                                                <input v-model="edit_sach.mo_ta_ngan" type="text" class="form-control"
-                                                    placeholder="Nhập Mô Tả Ngắn">
+                                                <label class="form-label">Hình Ảnh</label>
+                                                <input v-model="edit_sach.hinh_anh" type="text" class="form-control"
+                                                    placeholder="">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <label class="form-label">Mô Tả Chi Tiết</label>
-                                                <input v-model="edit_sach.mo_ta_chi_tiet" type="text" class="form-control"
-                                                    placeholder="Nhập Mô Tả Chi Tiết">
+                                                <!-- <input v-model="edit_sach.mo_ta_chi_tiet" type="text" class="form-control"
+                                                    placeholder="Nhập Mô Tả Chi Tiết"> -->
+                                                <textarea v-model="edit_sach.mo_ta_chi_tiet" class="form-control" name="" id="" cols="30" rows="10"></textarea>
                                             </div>
                                             <div class="col-6">
-                                                <label class="form-label">Hình Ảnh</label>
-                                                <input v-model="edit_sach.hinh_anh" type="text" class="form-control"
-                                                    placeholder="">
+                                                <label class="form-label">Mô Tả Ngắn</label>
+                                                <textarea v-model="edit_sach.mo_ta_ngan" class="form-control" name="" id="" cols="30" rows="10"></textarea>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -250,9 +250,11 @@
                                                 </select>
                                             </div>
                                             <div class="col-6">
-                                                <label class="form-label"> Slug Sách</label>
-                                                <input v-model="edit_sach.slug_sach" class="form-control" type="text">
+                                                <label class="form-label">Thể Loại</label>
+                                                <input v-model="edit_sach.ten_the_loai"  type="text" class="form-control"
+                                                    placeholder="Nhập Thể Loại">
                                             </div>
+                                            
 
                                         </div>
                                         <div class="row">
@@ -459,7 +461,26 @@ export default {
                         toaster.error(res.data.message);
                     }
                 });
-        }
+        },
+        toSlug(str) {
+            str = str.toLowerCase();
+            str = str
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
+            str = str.replace(/[đĐ]/g, 'd');
+            str = str.replace(/([^0-9a-z-\s])/g, '');
+            str = str.replace(/(\s+)/g, '-');
+            str = str.replace(/-+/g, '-');
+            str = str.replace(/^-+|-+$/g, '');
+
+            return str;
+        },
+        chuyenThanhSlug(){
+            this.create_sach.slug_sach = this.toSlug(this.create_sach.ten_sach);
+        },
+        chuyenThanhSlugEdit(){
+            this.edit_sach.slug_sach = this.toSlug(this.edit_sach.ten_sach)
+        },
     },
 }
 </script>

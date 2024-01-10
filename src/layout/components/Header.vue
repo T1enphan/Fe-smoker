@@ -332,9 +332,9 @@
 			</div>
 			<div class="user-box dropdown">
 				<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="../../assets/rocker/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+					<img src="https://i.pinimg.com/originals/25/9e/78/259e786afe5ba377712804575f980832.jpg" class="user-img" alt="user avatar">
 					<div class="user-info ps-3">
-						<p class="user-name mb-0">Pauline Seitz</p>
+						<p class="user-name mb-0">{{ten_hien_thi}}</p>
 						<p class="designattion mb-0">Web Designer</p>
 					</div>
 				</a>
@@ -362,7 +362,14 @@
 </template>
 <script>
 export default {
-
+	data() {
+        return {
+            ten_hien_thi    :   'Chưa đăng nhập',
+        }
+    },
+    mounted() {
+        this.ten_hien_thi   = localStorage.getItem('ho_ten');
+    },
 }
 </script>
 <style lang="">
